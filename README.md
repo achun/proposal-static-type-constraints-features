@@ -18,6 +18,7 @@ The Forms:
 1. `void [[T,TN]]` an Array of Array of T or Tn, and default value is undefined
 1. `void [[],T,Tn]` an object of T or Tn, and default value is []
 1. `void [!literal-value,TYPE]` an object of TYPE, and must be a value
+1. `void Object instanceof TYPE` an object instanceof TYPE
 
 A TYPE is an identifier that allows from an external module.
 
@@ -52,6 +53,12 @@ class PureStructure {
 // Conflict-free compatibility writing
 
 function noConflict(x = void(String)||'') {
+  // ...
+}
+
+// Inherit
+
+function webComponents(x = void Object instanceof HTMLElement) {
   // ...
 }
 
