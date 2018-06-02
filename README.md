@@ -41,11 +41,11 @@ class CustomClass {
 
 class PureStructure {
   constructor() {
-  let
-    name = void [!'',String], // must be a name
-    age  = void [!0, Number], // must be age
-    email = void String;
-    void {name, age, email};
+    void {
+      name: void [!'',String], // must be a name
+      age: void [!0, Number], // must be age
+      email: void String
+    };
   }
 }
 
