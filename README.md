@@ -36,7 +36,7 @@ let
     // Allowed type of CustomClass, and default value is {}
 
 function CustomName(x = void ['', Number, mod.BigNumber]) {
-  // Declarative results type
+  // Declarative results type, and the default value is not available
   void String;
   // same as void [String]
   // This function must eventually return a string
