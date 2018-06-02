@@ -15,6 +15,7 @@ The Forms:
 1. `void [T,Tn]` an object of T or Tn, and default value is undefined
 1. `void [literal-value,TYPE]` an object of TYPE, and default value is literal-value
 1. `void [literal-value,T,Tn]` an object of T or Tn, and default value is literal-value
+1. `void [[T,TN]]` an Array of Array of T or Tn, and default value is undefined
 
 A TYPE is an identifier that allows from an external module.
 
@@ -35,7 +36,10 @@ let
 
 function CustomName(x = void ['', Number, mod.BigNumber]) {
   // Declarative results type
-  void String; // This function must eventually return a string
+  void String;
+  // same as void [String]
+  // This function must eventually return a string
+
   // ...
 }
 
