@@ -49,6 +49,12 @@ class PureStructure {
   }
 }
 
+// Conflict-free compatibility writing
+
+function noConflict(x = void(String)||'') {
+  // ...
+}
+
 let
   custom = void Number,
     // The type is fixed to Number, and custom === undefined
