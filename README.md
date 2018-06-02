@@ -17,6 +17,7 @@ The Forms:
 1. `void [literal-value,T,Tn]` an object of T or Tn, and default value is literal-value
 1. `void [[T,TN]]` an Array of Array of T or Tn, and default value is undefined
 1. `void [[],T,Tn]` an object of T or Tn, and default value is []
+1. `void [!literal-value,TYPE]` an object of TYPE, and must be a value
 
 A TYPE is an identifier that allows from an external module.
 
@@ -24,16 +25,6 @@ A TYPE is an identifier that allows from an external module.
 
 ```js
 import mod from 'paths';
-
-let
-  custom = void Number,
-    // The type is fixed to Number, and custom === undefined
-  one    = void [1,Number],
-    // The type is fixed to Number, and one === 1
-  multi  = void [String,Number],
-    // Allowed type of String or Number, and multi === undefined
-  obj    = void [{},CustomClass];
-    // Allowed type of CustomClass, and default value is {}
 
 function CustomName(x = void ['', Number, mod.BigNumber]) {
   // Declarative results type, and the default value is not available
@@ -47,4 +38,24 @@ function CustomName(x = void ['', Number, mod.BigNumber]) {
 class CustomClass {
   // ...
 }
+
+class PureStructure {
+  constructor() {
+  let
+    name = void [!'',String], // must be a name
+    age  = void [!0, Number], // must be age
+    email = void String;
+    void {name, age, email};
+  }
+}
+
+let
+  custom = void Number,
+    // The type is fixed to Number, and custom === undefined
+  one    = void [1,Number],
+    // The type is fixed to Number, and one === 1
+  multi  = void [String,Number],
+    // Allowed type of String or Number, and multi === undefined
+  obj    = void [{},CustomClass];
+    // Allowed type of CustomClass, and default value is {}
 ```
