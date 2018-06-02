@@ -19,6 +19,8 @@ The Forms:
 1. `void [[],T,Tn]` an object of T or Tn, and default value is []
 1. `void [!literal-value,TYPE]` an object of TYPE, and must be a value
 1. `void Object instanceof TYPE` an object instanceof TYPE
+1. `void function(){}` a function
+1. `void Function instanceof protoFunction` a function
 
 A TYPE is an identifier that allows from an external module.
 
@@ -60,6 +62,28 @@ function noConflict(x = void(String)||'') {
 
 function webComponents(x = void Object instanceof HTMLElement) {
   // ...
+}
+
+// Prototype function
+
+function forEach(callback = void function(
+    currentValue = void undefined,
+    index = void Number,
+    array = void Array){}
+) {
+  // ...
+}
+
+function Foreach(callback = void Function instanceof protoCallback) {
+  // ...
+}
+
+function protoCallback(
+    currentValue = void undefined,
+    index = void Number,
+    array = void Array
+) {
+
 }
 
 let
