@@ -29,7 +29,7 @@ let
   one    = void [1,Number],
     // The type is fixed to Number, and one === 1
   multi  = void [String,Number],
-    // Allowed type of String of Number, and multi === undefined
+    // Allowed type of String or Number, and multi === undefined
   obj    = void [{},CustomClass];
     // Allowed type of CustomClass, and default value is {}
 
