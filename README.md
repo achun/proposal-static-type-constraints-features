@@ -20,8 +20,6 @@ A TYPE is an identifier that allows from an external module.
 
 ## Example
 
-For parameters:
-
 ```js
 import mod from 'paths';
 
