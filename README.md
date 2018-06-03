@@ -45,9 +45,9 @@ class CustomClass {
 class PureStructure {
   constructor() {
     void {
-      name: void [!'',String], // must be a name
-      age: void [!0, Number], // must be age
-      email: void String
+      name: !String, // must be a name
+      age: !Number,  // must be age
+      email: String  // default undefined
     };
   }
 }
