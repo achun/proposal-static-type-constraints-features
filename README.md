@@ -142,3 +142,30 @@ let
   obj    = void(CustomClass)||{};
     // Allowed type of CustomClass, and default value is {}
 ```
+
+## If the proposal passes
+
+E.g: asm.js
+
+```js
+function geometricMean(start, end) {
+  start = start|0; // start has type int
+  end = end|0;     // end has type int
+  return +exp(+logSum(start, end) / +((end - start)|0));
+}
+```
+
+Proposal:
+
+```js
+import types from 'asm-types';
+function geometricMean(start=void(!types.int), end=void(!types.int)) {
+  void(types.int);
+  return exp(logSum(start, end) / (end - start));
+}
+
+geometricMean('0','1'); // Throws TypeError: ....
+geometricMean(0); // Throws TypeError: 2 argument required, but only 1 present.
+geometricMean(0,1,2); // Throws TypeError: 2 argument required, but 3 present.
+geometricMean(0,1); // Ok ...
+```
