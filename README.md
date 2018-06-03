@@ -74,11 +74,18 @@ class FunctionPrototype {
 
 class callbackPrototypeWithDetail {
   constructor() {
-    void [[
-      ['currentValue', undefined, 'Optional comments'],
-      ['index', Number],
-      ['array', Array]
-    ]];
+    void [
+      // parameters
+      [
+        ['currentValue', undefined, 'Optional comments'],
+        ['index', Number],
+        ['array', Array]
+      ],
+      // results
+      [
+        'truthy', undefined, 'returns a value that coerces to true. callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values'
+      ]
+    ];
   }
 }
 
