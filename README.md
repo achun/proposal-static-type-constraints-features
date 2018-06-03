@@ -100,7 +100,7 @@ class callbackPrototypeWithDetail {
 
 // Conflict-free compatibility writing
 
-function noConflict(x = void(String)||'') {
+function noConflict(x = void(String)|'') {
   // ...
 }
 
@@ -135,11 +135,11 @@ function protoCallback(
 let
   custom = void Number,
     // The type is fixed to Number, and custom === undefined
-  one    = void(Number)||1,
+  one    = void(Number)|1,
     // The type is fixed to Number, and one === 1
   multi  = void [String, Number],
     // Allowed type of String or Number, and multi === undefined
-  obj    = void(CustomClass)||{};
+  obj    = void(CustomClass)|{};
     // Allowed type of CustomClass, and default value is {}
 ```
 
@@ -182,7 +182,7 @@ class ConfigType {
       encodeNames: Boolean,
       lines: [String],
       filename: String,
-      linker: undefined || {       // Need support?
+      linker: undefined | {       // Need support?
         statics: { [String]: Number },
       }
     };
