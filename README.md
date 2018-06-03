@@ -12,7 +12,7 @@ The Forms:
 1. `void [TYPE]` an Array of TYPE
 1. `void [[TYPE]]` an Array of Array of TYPE
 1. `void (T,Tn)` an object of T or Tn
-1. `void [T,TN]` an Array of Array of T or Tn
+1. `void [T,TN]` an Array of T or Tn
 1. `void !TYPE` an object of TYPE, and can not be omitted
 1. `void Object instanceof TYPE` an object instanceof TYPE
 1. `void function(){}` a function
