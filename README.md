@@ -52,6 +52,16 @@ class PureStructure {
   }
 }
 
+class ClassPrototype {
+  constructor() {
+    void {
+      name: String,
+      age: Number,
+      email: String
+    };
+  }
+}
+
 // Conflict-free compatibility writing
 
 function noConflict(x = void(String)||'') {
