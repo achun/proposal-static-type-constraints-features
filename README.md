@@ -203,8 +203,8 @@ class ConfigType {
       encodeNames: Boolean,
       lines: [String],
       filename: String,
-      linker: undefined || {       // Need support?
-        statics: { [String]: Number },
+      linker: {
+        statics: { [String]: Number } // Need support?
       }
     };
   }
