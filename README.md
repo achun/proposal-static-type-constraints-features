@@ -110,7 +110,7 @@ function webComponents(x = void Object instanceof HTMLElement) {
   // ...
 }
 
-// Prototype function
+// Inline prototype function
 
 function forEach(callback = void function(
     currentValue = void undefined,
