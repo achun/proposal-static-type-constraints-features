@@ -170,6 +170,19 @@ geometricMean(0,1,2); // Throws TypeError: 2 argument required, but 3 present.
 geometricMean(0,1); // Ok ...
 ```
 
+## Compatibility
+
+For safety, it may be a good idea to use it with default values.
+
+```js
+let
+  isUndefined = void Number,
+    // Static type constraint does not take effect
+  isNumberUndefined = void(Number)|undefined;
+    // Static type constraint take effect
+
+```
+
 ## Pending
 
 I'm not sure if it is necessary to support multiple levels of nesting
