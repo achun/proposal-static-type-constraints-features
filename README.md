@@ -8,16 +8,13 @@ or the first statement of the body of the function.
 
 The Forms:
 
-1. `void TYPE` an object of TYPE, and default value is undefined
+1. `void TYPE` an object of TYPE
 1. `void [TYPE]` same as `void TYPE`
-1. `void [[TYPE]]` an Array of TYPE, and default value is undefined
-1. `void [[[TYPE]]]` an Array of Array of TYPE, and default value is undefined
-1. `void [T,Tn]` an object of T or Tn, and default value is undefined
-1. `void [literal-value,TYPE]` an object of TYPE, and default value is literal-value
-1. `void [literal-value,T,Tn]` an object of T or Tn, and default value is literal-value
-1. `void [[T,TN]]` an Array of Array of T or Tn, and default value is undefined
-1. `void [[],T,Tn]` an object of T or Tn, and default value is []
-1. `void [!literal-value,TYPE]` an object of TYPE, and must be a value
+1. `void [[TYPE]]` an Array of TYPE
+1. `void [[[TYPE]]]` an Array of Array of TYPE
+1. `void [T,Tn]` an object of T or Tn
+1. `void [[T,TN]]` an Array of Array of T or Tn
+1. `void [!TYPE]` an object of TYPE
 1. `void Object instanceof TYPE` an object instanceof TYPE
 1. `void function(){}` a function
 1. `void Function instanceof protoFunction` a function
@@ -29,8 +26,8 @@ A TYPE is an identifier that allows from an external module.
 ```js
 import mod from 'paths';
 
-function CustomName(x = void ['', Number, mod.BigNumber]) {
-  // Declarative results type, and the default value is not available
+function CustomNumber(x = void([Number, mod.BigNumber])) {
+  // Declarative results type, and the default value is undefined
   void String;
   // same as void [String]
   // This function must eventually return a string
@@ -91,7 +88,11 @@ class callbackPrototypeWithDetail {
       ],
       // results
       [
-        'truthy', undefined, 'returns a value that coerces to true. callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values'
+        'truthy', undefined, `
+          returns a value that coerces to true. callback is invoked only for
+          indexes of the array which have assigned values; it is not invoked for
+          indexes which have been deleted or which have never been assigned values
+          `
       ]
     ];
   }
@@ -134,10 +135,10 @@ function protoCallback(
 let
   custom = void Number,
     // The type is fixed to Number, and custom === undefined
-  one    = void [1,Number],
+  one    = void(Number)||1,
     // The type is fixed to Number, and one === 1
-  multi  = void [String,Number],
+  multi  = void [String, Number],
     // Allowed type of String or Number, and multi === undefined
-  obj    = void [{},CustomClass];
+  obj    = void(CustomClass)||{};
     // Allowed type of CustomClass, and default value is {}
 ```
