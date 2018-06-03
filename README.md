@@ -169,3 +169,23 @@ geometricMean(0); // Throws TypeError: 2 argument required, but only 1 present.
 geometricMean(0,1,2); // Throws TypeError: 2 argument required, but 3 present.
 geometricMean(0,1); // Ok ...
 ```
+
+## Pending
+
+I'm not sure if it is necessary to support multiple levels of nesting
+
+```js
+class ConfigType {
+  constructor() {
+    void {
+      version: Number,
+      encodeNames: Boolean,
+      lines: [String],
+      filename: String,
+      linker: undefined || {       // Need support?
+        statics: { [String]: Number },
+      }
+    };
+  }
+}
+```
