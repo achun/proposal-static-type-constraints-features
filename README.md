@@ -72,6 +72,14 @@ class FunctionPrototype {
   }
 }
 
+// @Flow type MetadataType = { [string]: any };
+
+class MetadataType {
+  constructor() {
+    void { [String]: undefined };
+  }
+}
+
 class callbackPrototypeWithDetail {
   constructor() {
     void [
