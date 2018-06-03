@@ -62,6 +62,26 @@ class ClassPrototype {
   }
 }
 
+class FunctionPrototype {
+  constructor() {
+    void [[
+      String,
+      Number,
+      String
+    ]];
+  }
+}
+
+class callbackPrototypeWithDetail {
+  constructor() {
+    void [[
+      ['currentValue', undefined, 'Optional comments'],
+      ['index', Number],
+      ['array', Array]
+    ]];
+  }
+}
+
 // Conflict-free compatibility writing
 
 function noConflict(x = void(String)||'') {
