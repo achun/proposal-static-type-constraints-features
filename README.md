@@ -183,6 +183,17 @@ let
 
 ```
 
+Maybe typeof is better
+
+```js
+let
+  isString = typeof(Number),
+    // just typeof
+  isNumberUndefined = typeof(Number) && undefined;
+    // Static type constraint take effect
+
+```
+
 ## Pending
 
 I'm not sure if it is necessary to support multiple levels of nesting
