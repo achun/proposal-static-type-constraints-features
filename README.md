@@ -8,61 +8,122 @@ or the first statement of the body of the function.
 
 The Forms:
 
+1. `void %PrimitiveDefaultValues%` See [PrimitiveDefaultValues](#PrimitiveDefaultValues)
 1. `void TYPE` an object of TYPE
 1. `void [TYPE]` an Array of TYPE
 1. `void [[TYPE]]` an Array of Array of TYPE
 1. `void (T,Tn)` an object of T or Tn
 1. `void [T,TN]` an Array of T or Tn
 1. `void !TYPE` an object of TYPE, and can not be omitted
-1. `void Object instanceof TYPE` an object instanceof TYPE
-1. `void function(){}` a function
-1. `void Function instanceof protoFunction` a function
+1. `void TYPE++` an object instanceof TYPE
 
 A TYPE is an identifier that allows from an external module.
+
+## PrimitiveDefaultValues
+
+Knowing that:
+
+```js
+let x = 0, y = new Number(0);
+
+console.log(x instanceof Number); // false
+console.log(y instanceof Number); // true
+console.log(x === y);             // false
+```
+
+Use the primitive default value to solve this problem.
+
+The supported primitive default values:
+
+1. `''`     string
+1. `false`  boolean
+1. `0`      integer
+1. `{}`     Object and property computed with string
+1. `[]`     Array, the previous article has appeared
+
+Legal but is not responsible for implementing.
+
+1. `+0`     unsigned integer
+1. `1`      1bit
+1. `2`      2bit
+1. `3`      3bit
+1. `4`      4bit
+1. `5`      5bit
+1. `6`      6bit
+1. `7`      7bit
+1. `8`      i8,  1 byte
+1. `+8`     u8,  1 byte
+1. `16`     i16, 2 byte
+1. `+16`    u16, 2 byte
+1. `32`     i32, 4 byte
+1. `+32`    u32, 4 byte
+1. `64`     i64, 4 byte
+1. `+64`    u64, 4 byte
+1. `128`    i128, 4 byte
+1. `+128`   u128, 4 byte
+1. `.0`     float
+1. `.32`    float32
+1. `.64`    float64
+1. `.128`   float128
+
+So
+
+```js
+function PrimitiveDefaultValues(
+  s = void('')||'',       // s is string, typeof s === 'string'
+  n = void(0)||'',        // n is number, typeof n === 'number'
+  b = void(false)||false  // b is boolean, typeof b === 'boolean'
+) {
+  void {                  // results object
+    name: !'',            // must be name: string
+    stars: !0,            // must be stars: number
+    followers: [{}]       // optional followers: [object]
+  };
+}
+```
 
 ## Example
 
 ```js
 import mod from 'paths';
 
-function CustomNumber(x = void(Number, mod.BigNumber)) {
-  // Declarative results type, and the default value is undefined
-  void String;
-  // same as void(String)
-  // This function must eventually return a string
-
-  // ...
+function CustomNumber(
+  x = void(0, mod.BigNumber)
+  // x is number or mod.BigNumber, and default is undefined
+) {
+  void '';
+  // This function results an omissible string
 }
 
 class CustomClass {
-  // ...
+  constructor() {
+    void {
+      name: '',
+      age: 0,
+      email: ''
+    };
+    // properties structure
+  }
+}
+
+class Interface {
+  constructor() {
+    void undefined;
+    // Just a semantic interface,
+    // usually it means that the successor must override all methods
+  }
+  method(
+    // void ...
+  ){}
 }
 
 class PureStructure {
   constructor() {
     void {
-      name: !String, // must be a name
-      age: !Number,  // must be age
-      email: String  // default undefined
+      name: !'', // must be a name
+      age: !0,  // must be age
+      email: ''  // default undefined
     };
-  }
-}
-
-class ClassPrototype {
-  constructor() {
-    void {
-      name: String,
-      age: Number,
-      email: String
-    };
-  }
-}
-
-class FunctionPrototype {
-  constructor() {
-    void (
-      (String,Number,String)
-    );
   }
 }
 
@@ -70,72 +131,41 @@ class FunctionPrototype {
 
 class MetadataType {
   constructor() {
-    void { [String]: undefined };
-  }
-}
-
-class callbackPrototypeWithDetail {
-  constructor() {
-    void (
-      // parameters
-      (
-        ['currentValue', undefined, 'Optional comments'],
-        ['index', Number],
-        ['array', Array]
-      ),
-      // results
-      [
-        'truthy', undefined, `
-          returns a value that coerces to true. callback is invoked only for
-          indexes of the array which have assigned values; it is not invoked for
-          indexes which have been deleted or which have never been assigned values
-          `
-      ]
-    );
+    void {['']: undefined}; // same as void {}
   }
 }
 
 // Conflict-free compatibility writing
 
-function noConflict(x = void(String)||'') {
+function noConflict(x = void('')||'') {
   // ...
 }
 
 // Inherit
 
-function webComponents(x = void Object instanceof HTMLElement) {
+function webComponents(x = void ++HTMLElement) {
   // ...
 }
 
-// Inline prototype function
-
-function forEach(callback = void function(
-    currentValue = void undefined,
-    index = void Number,
-    array = void Array){}
-) {
-  // ...
-}
-
-function Foreach(callback = void Function instanceof protoCallback) {
+function forEach(callback = void protoCallback) {
   // ...
 }
 
 function protoCallback(
     currentValue = void undefined,
-    index = void Number,
-    array = void Array
+    index = void 0,
+    array = void []
 ) {
 
 }
 
 let
-  custom = void Number,
-    // The type is fixed to Number, and custom === undefined
-  one    = void(Number)||1,
-    // The type is fixed to Number, and one === 1
-  multi  = void(String, Number),
-    // Allowed type of String or Number, and multi === undefined
+  custom = void 0,
+    // The type is fixed to number, and custom === undefined
+  one    = void(0)||1,
+    // The type is fixed to number, and one === 1
+  multi  = void('', 0),
+    // Allowed type of string or number, and multi === undefined
   obj    = void(CustomClass)||{};
     // Allowed type of CustomClass, and default value is {}
 ```
@@ -162,9 +192,9 @@ function geometricMean(start = void(!types.int), end = void(!types.int)) {
 }
 
 geometricMean('0','1'); // Throws TypeError: ....
-geometricMean(0); // Throws TypeError: 2 argument required, but only 1 present.
-geometricMean(0,1,2); // Throws TypeError: 2 argument required, but 3 present.
-geometricMean(0,1); // Ok ...
+geometricMean(0);       // Throws TypeError: 2 argument required, but ...
+geometricMean(0,1,2);   // Throws TypeError: 2 argument required, but ...
+geometricMean(0,1);     // Ok ...
 ```
 
 ## Compatibility
@@ -179,19 +209,11 @@ Even if it is operated, there are no side effects.
 
 The new engine will extract the type description and will not perform operations.
 
-So, the form `Object instanceof TYPE` is for backward compatibility.
+So, the form `TYPE++` is for backward compatibility.
 
 ```js
-function CustomString(x = void( Object instanceof String ) || 'abc' ) {
- // x is String or inherited String
-}
-```
-
-Maybe null is better.
-
-```js
-function CustomString(x = void( null instanceof String ) || 'abc' ) {
- // x is String or inherited String
+function CustomString(x = void('',String++) || 'abc' ) {
+ // x is string or instanceof String and default value is 'abc'
 }
 ```
 
@@ -209,60 +231,53 @@ let
 Last resort: Identifiers expressed as strings
 
 ```js
-// @Flow
-// let x: number = 0;
-let x = void('number')||0; // You know, number !== Number
+// @Flow let x: number = 0;
+let x = void('number')||0;
+// You know, number !== Number, and number is not a built-in type in ECMAScript
 ```
 
-## PrimitiveDefaultValues
-
-Knowing that:
+## NotSupport
 
 ```js
-let x = 0, y = new Number(0);
 
-console.log(x instanceof Number); // false
-console.log(y instanceof Number); // true
-console.log(x === y);             // false
-```
+function notSupportVoidTrue(
+  b = void(true)||false   // throws TypeError: ...
+) {}
 
-Use the primitive default value to solve this problem.
+// Multiple levels of nesting
 
-The supported primitive default values:
-
-1. `''`     string
-1. `false`  boolean
-1. `0`      number
-
-So
-
-```js
-function PrimitiveDefaultValues(
-  s = void('')||'',      // s is string, typeof s === 'string'
-  n = void(0)||'',       // n is number, typeof n === 'number'
-  b = void(false)||false // b is boolean, typeof b === 'boolean'
-) {
-}
-
-function notSupport(b = void(true)||false) {}
-```
-
-## Pending
-
-I'm not sure if it is necessary to support multiple levels of nesting
-
-```js
 class ConfigType {
   constructor() {
     void {
-      version: Number,
-      encodeNames: Boolean,
-      lines: [String],
-      filename: String,
+      version: 0,
+      encodeNames: false,
+      lines: [''],
+      filename: '',
       linker: {
-        statics: { [String]: Number } // Need support?
+        statics: { ['']: 0 } // throws TypeError: ...
       }
     };
   }
 }
+
+// void function
+
+function forEach(
+  callback = void function( // throws TypeError: ...
+    currentValue = void undefined,
+    index = void Number,
+    array = void Array){}
+) {}
+
+// void ArrowFunctionIdentifier
+
+const ArrowFunction = (
+    currentValue = void undefined,
+    index = void Number,
+    array = void Array
+)=>{};
+
+function forEach(
+  callback = void ArrowFunction // throws TypeError: ...
+) {}
 ```
