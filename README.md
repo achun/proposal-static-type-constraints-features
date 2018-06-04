@@ -8,7 +8,7 @@ or the first statement of the body of the function.
 
 The Forms:
 
-1. `void %PrimitiveDefaultValues%` See [PrimitiveDefaultValues](#PrimitiveDefaultValues)
+1. `void %PrimitiveDefaultValues%` See [PrimitiveDefaultValues](#primitivedefaultvalues)
 1. `void TYPE` an object of TYPE
 1. `void [TYPE]` an Array of TYPE
 1. `void [[TYPE]]` an Array of Array of TYPE
