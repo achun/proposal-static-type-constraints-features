@@ -206,6 +206,47 @@ let
 
 ```
 
+Last resort: Identifiers expressed as strings
+
+```js
+// @Flow
+// let x: number = 0;
+let x = void('number')||0; // You know, number !== Number
+```
+
+## PrimitiveDefaultValues
+
+Knowing that:
+
+```js
+let x = 0, y = new Number(0);
+
+console.log(x instanceof Number); // false
+console.log(y instanceof Number); // true
+console.log(x === y);             // false
+```
+
+Use the primitive default value to solve this problem.
+
+The supported primitive default values:
+
+1. `''`     string
+1. `false`  boolean
+1. `0`      number
+
+So
+
+```js
+function PrimitiveDefaultValues(
+  s = void('')||'',      // s is string, typeof s === 'string'
+  n = void(0)||'',       // n is number, typeof n === 'number'
+  b = void(false)||false // b is boolean, typeof b === 'boolean'
+) {
+}
+
+function notSupport(b = void(true)||false) {}
+```
+
 ## Pending
 
 I'm not sure if it is necessary to support multiple levels of nesting
