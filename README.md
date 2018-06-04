@@ -51,16 +51,16 @@ Legal but is not responsible for implementing.
 1. `5`      5bit
 1. `6`      6bit
 1. `7`      7bit
-1. `8`      i8,  1 byte
-1. `+8`     u8,  1 byte
-1. `16`     i16, 2 byte
-1. `+16`    u16, 2 byte
-1. `32`     i32, 4 byte
-1. `+32`    u32, 4 byte
-1. `64`     i64, 4 byte
-1. `+64`    u64, 4 byte
-1. `128`    i128, 4 byte
-1. `+128`   u128, 4 byte
+1. `8`      i8
+1. `+8`     u8
+1. `16`     i16
+1. `+16`    u16
+1. `32`     i32
+1. `+32`    u32
+1. `64`     i64
+1. `+64`    u64
+1. `128`    i128
+1. `+128`   u128
 1. `.0`     float
 1. `.32`    float32
 1. `.64`    float64
