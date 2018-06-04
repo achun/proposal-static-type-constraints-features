@@ -156,7 +156,7 @@ Proposal:
 
 ```js
 import types from 'asm-types';
-function geometricMean(start=void(!types.int), end=void(!types.int)) {
+function geometricMean(start = void(!types.int), end = void(!types.int)) {
   void(types.int);
   return exp(logSum(start, end) / (end - start));
 }
@@ -169,6 +169,25 @@ geometricMean(0,1); // Ok ...
 
 ## Compatibility
 
+The real purpose of a void expression is not an operation.
+
+It is description for typing, the literal semantics.
+
+It is compatible with the old engine.
+
+Even if it is operated, there are no side effects.
+
+The new engine will extract the type description and will not perform operations.
+
+
+So, the form `Object instanceof TYPE` is for backward compatibility.
+
+```js
+function CustomString(x = void( Object instanceof String) || 'abc' ) {
+ // x is String or inherited String
+}
+```
+
 For safety, it may be a good idea to use it with default values.
 
 ```js
@@ -176,17 +195,6 @@ let
   isUndefined = void Number,
     // Static type constraint does not take effect
   isNumberUndefined = void(Number)||undefined;
-    // Static type constraint take effect
-
-```
-
-Maybe typeof is better
-
-```js
-let
-  isString = typeof(Number),
-    // just typeof
-  isNumberUndefined = typeof(Number) && undefined;
     // Static type constraint take effect
 
 ```
