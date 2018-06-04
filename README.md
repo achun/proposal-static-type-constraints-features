@@ -179,11 +179,18 @@ Even if it is operated, there are no side effects.
 
 The new engine will extract the type description and will not perform operations.
 
-
 So, the form `Object instanceof TYPE` is for backward compatibility.
 
 ```js
-function CustomString(x = void( Object instanceof String) || 'abc' ) {
+function CustomString(x = void( Object instanceof String ) || 'abc' ) {
+ // x is String or inherited String
+}
+```
+
+Maybe null is better.
+
+```js
+function CustomString(x = void( null instanceof String ) || 'abc' ) {
  // x is String or inherited String
 }
 ```
